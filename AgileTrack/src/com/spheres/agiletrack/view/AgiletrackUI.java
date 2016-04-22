@@ -28,6 +28,9 @@ public class AgiletrackUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest request) {
+		final MainView main = new MainView();
+		setContent(main);
+		
 		/*final VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(true);
 		setContent(layout);
@@ -38,15 +41,17 @@ public class AgiletrackUI extends UI {
 				layout.addComponent(new Label("Thank you for clicking"));
 			}
 		});
-		layout.addComponent(button);*/
-		getPage().setTitle("AgileTrack ...");
-		navigator = new Navigator(this,this);
+		layout.addComponent(button);
+		*/
+		
+		//getPage().setTitle("AgileTrack ...");
+		//navigator = new Navigator(this,this);
 		
 		//navigator.addView("", new MainView());
 		
 		
-		final MainView app = new MainView();
-		setContent(app);
+		//final MainView app = new MainView();
+		//setContent(app);
 		
 		
 	}

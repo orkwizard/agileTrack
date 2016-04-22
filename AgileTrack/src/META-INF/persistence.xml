@@ -5,10 +5,10 @@
 		<class>com.spheres.agiletrack.entities.Command</class>
 		<class>com.spheres.agiletrack.entities.Part</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agileTrack"/>
-			<property name="javax.persistence.jdbc.password" value="sys73xrv"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.194.21.59:3306/agile"/>
+			<property name="javax.persistence.jdbc.password" value="Sys73xrv19/"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-			<property name="javax.persistence.jdbc.user" value="agile"/>
+			<property name="javax.persistence.jdbc.user" value="eosorio"/>
 		</properties>
 	</persistence-unit>
 </persistence>

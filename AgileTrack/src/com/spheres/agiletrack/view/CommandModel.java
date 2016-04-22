@@ -21,9 +21,9 @@ import com.vaadin.ui.declarative.Design;
 @SuppressWarnings("serial")
 public class CommandModel extends VerticalLayout {
 	protected ComboBox cbCommand;
+	protected Table table_parrs;
 	protected Button btNew;
 	protected Button btDelete;
-	protected Table table_parrs;
 
 	public CommandModel() {
 		Design.read(this);

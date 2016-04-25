@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import com.ejt.vaadin.loginform.DefaultVerticalLoginForm;
 import com.ejt.vaadin.loginform.LoginForm.LoginEvent;
 import com.ejt.vaadin.loginform.LoginForm.LoginListener;
+import com.spheres.agiletrack.view.forms.authentication.Login;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
@@ -25,7 +26,7 @@ public class AgiletrackUI extends UI {
 
 	Navigator navigator;
 	protected static final String MAINVIEW = "main";
-	DefaultVerticalLoginForm loginForm = new DefaultVerticalLoginForm();
+	Login loginForm = new Login();
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = AgiletrackUI.class)
 	
@@ -49,6 +50,9 @@ public class AgiletrackUI extends UI {
 		});
 		
 		loginForm.clear();
+		
+		
+		
 		setContent(loginForm);
 		
 		/*final VerticalLayout layout = new VerticalLayout();

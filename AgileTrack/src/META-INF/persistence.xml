@@ -6,6 +6,7 @@
 		<class>com.spheres.agiletrack.entities.Part</class>
 		<class>com.spheres.agiletrack.entities.Data</class>
 		<class>com.spheres.agiletrack.entities.Message</class>
+		<class>com.spheres.agiletrack.entities.Client</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.194.21.59:3306/agile"/>
 			<property name="javax.persistence.jdbc.password" value="Sys73xrv19/"/>

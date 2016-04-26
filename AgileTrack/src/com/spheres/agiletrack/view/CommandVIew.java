@@ -22,6 +22,7 @@ public class CommandVIew extends CommandModel implements View {
 	private JPAContainer<Part> parts;
 	private final static String Persistence_UNIT ="Agile";
 	private Command commandFilter;
+	public static final String VIEW_NAME = "command_view";
 	
 	
 	@Override

@@ -36,7 +36,10 @@ public class AgiletrackUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest request) {
-		final MainView main = new MainView();
+		final MainViewImpl main = new MainViewImpl();
+		loginForm.clear();
+		setContent(loginForm);
+		
 		loginForm.addLoginListener(new LoginListener() {
 			
 			@Override
@@ -49,11 +52,7 @@ public class AgiletrackUI extends UI {
 			}
 		});
 		
-		loginForm.clear();
 		
-		
-		
-		setContent(loginForm);
 		
 		/*final VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(true);

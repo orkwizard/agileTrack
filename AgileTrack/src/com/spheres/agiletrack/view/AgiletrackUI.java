@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import com.ejt.vaadin.loginform.DefaultVerticalLoginForm;
 import com.ejt.vaadin.loginform.LoginForm.LoginEvent;
 import com.ejt.vaadin.loginform.LoginForm.LoginListener;
+import com.google.gwt.thirdparty.javascript.rhino.head.tools.debugger.Main;
 import com.spheres.agiletrack.view.forms.authentication.Login;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -23,8 +24,6 @@ import com.vaadin.ui.VerticalLayout;
 @Widgetset("com.spheres.agiletrack.view.widgetset.AgiletrackWidgetset")
 
 public class AgiletrackUI extends UI {
-
-	Navigator navigator;
 	protected static final String MAINVIEW = "main";
 	Login loginForm = new Login();
 	@WebServlet(value = "/*", asyncSupported = true)
@@ -36,10 +35,10 @@ public class AgiletrackUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest request) {
+		getPage().setTitle("AgileTrack");
 		final MainViewImpl main = new MainViewImpl();
 		loginForm.clear();
 		setContent(loginForm);
-		
 		loginForm.addLoginListener(new LoginListener() {
 			
 			@Override
@@ -51,32 +50,6 @@ public class AgiletrackUI extends UI {
 				setContent(main);
 			}
 		});
-		
-		
-		
-		/*final VerticalLayout layout = new VerticalLayout();
-		layout.setMargin(true);
-		setContent(layout);
-
-		Button button = new Button("Click Me");
-		button.addClickListener(new Button.ClickListener() {
-			public void buttonClick(ClickEvent event) {
-				layout.addComponent(new Label("Thank you for clicking"));
-			}
-		});
-		layout.addComponent(button);
-		*/
-		
-		//getPage().setTitle("AgileTrack ...");
-		//navigator = new Navigator(this,this);
-		
-		//navigator.addView("", new MainView());
-		
-		
-		//final MainView app = new MainView();
-		//setContent(app);
-		
-		
 	}
 
 }

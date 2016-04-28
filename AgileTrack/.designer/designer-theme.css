@@ -206,6 +206,134 @@
 	visibility: visible;
 }
 
+.root-layout.form-template-vaadin {
+	background-color: #fff;
+	padding: 60px;
+}
+
+.root-layout.form-template-vaadin .v-nativebutton {
+	background: none;
+	border: none;
+}
+
+.root-layout.form-template-vaadin .v-nativebutton:hover {
+	cursor: pointer;
+}
+
+.root-layout.form-template-vaadin .header-label {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1.618em;
+	width: 100%;
+	margin-bottom: 20px;
+	color: #000;
+	border-bottom: 3px solid #D0C7C7;
+}
+
+.root-layout.form-template-vaadin .billing-formlayout {
+	background: #f6f3f3;
+	border: solid 1px #fff;
+	margin: 0 30px 0 0px;
+	float: left;
+	padding: 20px;
+	width: 100%;
+	max-width: 722px;
+}
+
+.root-layout.form-template-vaadin .billing-formlayout .v-label {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.root-layout.form-template-vaadin .billing-formlayout .form-textfield {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background: none;
+	border-radius: 0;
+	border: none;
+	box-shadow: none;
+	border-bottom: 2px solid #D0C7C7;
+}
+
+.root-layout.form-template-vaadin .billing-formlayout .email-field {
+	min-width: 250px;
+}
+
+.root-layout.form-template-vaadin .order-summary-layout {
+	background-color: #8CD211;
+	float: right;
+	padding: 20px;
+}
+
+.root-layout.form-template-vaadin .order-summary-layout .v-label {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #fff;
+}
+
+.root-layout.form-template-vaadin .order-summary-layout .header-label-small {
+	width: 100%;
+	text-transform: uppercase;
+	color: #fff;
+	border-bottom: 2px solid #C8F08F;
+}
+
+.root-layout.form-template-vaadin .order-summary-layout .cancel-order-button {
+	background: none;
+	border: none;
+	position: relative;
+	margin-left: 15px;
+	margin-top: 10px;
+	padding: 0;
+	float: right;
+}
+
+.root-layout.form-template-vaadin .order-summary-layout .cancel-order-button .v-icon {
+	font-size: 25px;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	color: #4B8400;
+}
+
+.root-layout.form-template-vaadin .order-summary-layout .order-sum {
+	position: absolute;
+	left: 170px;
+	text-align: right;
+	width: 150px;
+}
+
+.root-layout.form-template-vaadin .order-summary-layout .total-sum {
+	border-top: solid 2px #C8F08F;
+	color: #C8F08F !important;
+	font-size: 2em;
+}
+
+.root-layout.form-template-vaadin .order-summary-layout .total-sum:first-letter {
+	font-weight: 400;
+}
+
+.root-layout.form-template-vaadin[width-range~="321px-768px"] {
+	padding: 10px;
+}
+
+.root-layout.form-template-vaadin[width-range~="321px-768px"] .billing-formlayout {
+	margin: 15px 0 0 0;
+	width: 100% !important;
+}
+
+.root-layout.form-template-vaadin[width-range~="321px-768px"] .order-summary-layout {
+	margin: 15px 0 0 0;
+}
+
+.root-layout.form-template-vaadin[width-range~="769px-1426px"] .billing-formlayout {
+	margin-bottom: 30px;
+}
+
+.root-layout.form-template-vaadin[width-range~="769px-1426px"] .order-summary-layout {
+	float: left;
+}
+
+.form-template-vaadin[width-range~="321px-768px"], .form-template-vaadin[width-range~="769px-1426px"] {
+	visibility: visible;
+}
+
 /**
  * Checks if a list contains a certain value.
  * 

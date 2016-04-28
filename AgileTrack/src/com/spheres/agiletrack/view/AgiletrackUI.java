@@ -2,22 +2,15 @@ package com.spheres.agiletrack.view;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.ejt.vaadin.loginform.DefaultVerticalLoginForm;
 import com.ejt.vaadin.loginform.LoginForm.LoginEvent;
 import com.ejt.vaadin.loginform.LoginForm.LoginListener;
-import com.google.gwt.thirdparty.javascript.rhino.head.tools.debugger.Main;
 import com.spheres.agiletrack.view.forms.authentication.Login;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
-import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 @Theme("agiletrack")

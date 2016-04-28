@@ -40,6 +40,16 @@ public class Dashboard extends CssLayout {
 	protected Label statistics_label16;
 	protected Label statistics_label17;
 	protected Label statistics_label19;
+	protected CssLayout dashboard_item28;
+	protected Label dashboard_item_header4;
+	protected Label statistics_label20;
+	protected Label statistics_label21;
+	protected Label statistics_label22;
+	protected Label statistics_label23;
+	protected Label statistics_label24;
+	protected CssLayout dashboardpane;
+	protected Label dashboard_item_header5;
+	protected Label statistics_label25;
 
 	public Dashboard() {
 		Design.read(this);

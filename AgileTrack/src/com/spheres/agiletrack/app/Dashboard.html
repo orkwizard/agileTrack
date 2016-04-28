@@ -1,82 +1,6 @@
 <!doctype html>
 <html>
  <head>
-  <style>
-.root-layout.dashboard-view-template-vaadin {
-	$root-background-color: #ffffff;
-	$template-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	$main-color: #5AAAFA;
-	$menu-color: #5AAAFA;
-	$header-label-font-size: 1.618em;
-	background-color: $root-background-color;
-	padding: 60px;
-	
-	.v-nativebutton {
-		background: none;
-		border: none;
-		
-		&:hover{
-			cursor: pointer;
-		}
-	}
-	
-	.header-label {
-		font-size: $header-label-font-size;
-		font-family: $template-font-family;
-		width: 100%;
-		margin-bottom: 20px;
-		color: #000000;
-		border-bottom: 3px solid #D0C7C7;
-	}
-	
-	.header-label-small {
-	    font-family: $template-font-family;
-		width: 100%;
-		color: $main-color;
-        text-transform: uppercase;
-		border-bottom: 2px solid #D0C7C7;
-	}
-	
-	.dashboard-layout {
-		padding: 60px 60px 0 60px;
-	}
-    
-	.dashboard-item {
-		background-color: #f6f3f3;
-		border: 1px solid white;
-		margin: 0 30px 30px 0px;
-		padding: 15px;
-		
-		> .statistics-label{
-			margin-top: 15px;
-			font-family: $template-font-family;
-			
-			.statistics-value{
-				float: right;
-				font-weight: bold;
-			}
-		}
-	}
-	
-	&[width-range~="321px-768px"]{
-		padding: 10px;
-		
-		.dashboard-layout{
-			padding: 10px;
-		}
-		
-		.dashboard-item{
-			width: 100% !important;
-			min-width: 321px;
-			margin: 0;
-		}
-	}
-}
-
-.dashboard-view-template-vaadin[width-range~="321px-768px"]{
-	visibility: visible;
-}
-</style> 
   <meta charset="UTF-8" name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src&quot;,&quot;THEME&quot;:&quot;agiletrack&quot;}">
  </head> 
  <body> 
@@ -157,6 +81,40 @@
     <vaadin-label style-name="statistics-label" _id="statistics_label19">
       Rome, Italy 
      <span class="statistics-value">Oct 19, 2015</span> 
+    </vaadin-label> 
+   </vaadin-css-layout> 
+   <vaadin-css-layout style-name="dashboard-item" width="365px" height="250px" _id="dashboard_item28"> 
+    <vaadin-label style-name="header-label-small" size-auto plain-text _id="dashboard_item_header4">
+      Upcoming Vaadin Trainings 
+    </vaadin-label> 
+    <vaadin-label style-name="statistics-label" _id="statistics_label20">
+      Turku, Finland 
+     <span class="statistics-value">Sep 9, 2015</span> 
+    </vaadin-label> 
+    <vaadin-label style-name="statistics-label" _id="statistics_label21">
+      Berlin, Germany 
+     <span class="statistics-value">Sep 14, 2015</span> 
+    </vaadin-label> 
+    <vaadin-label style-name="statistics-label" _id="statistics_label22">
+      San Jose, U.S 
+     <span class="statistics-value">Sep 21, 2015</span> 
+    </vaadin-label> 
+    <vaadin-label style-name="statistics-label" _id="statistics_label23">
+      München, Germany 
+     <span class="statistics-value">Oct 5, 2015</span> 
+    </vaadin-label> 
+    <vaadin-label style-name="statistics-label" _id="statistics_label24">
+      Rome, Italy 
+     <span class="statistics-value">Oct 19, 2015</span> 
+    </vaadin-label> 
+   </vaadin-css-layout> 
+   <vaadin-css-layout _id="dashboardpane"> 
+    <vaadin-label style-name="header-label-small" size-auto plain-text _id="dashboard_item_header5">
+      Graphs 
+    </vaadin-label> 
+    <vaadin-label style-name="statistics-label" _id="statistics_label25">
+      Turku, Finland 
+     <span class="statistics-value">Sep 9, 2015</span> 
     </vaadin-label> 
    </vaadin-css-layout> 
   </vaadin-css-layout>  

@@ -1,8 +1,6 @@
 package com.spheres.agiletrack.view.forms.authentication;
 
-import com.ejt.vaadin.loginform.*;
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.ejt.vaadin.loginform.LoginForm;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -11,6 +9,12 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 
 public class Login extends LoginForm{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final static String Persistence_UNIT ="Agile";
 
 	@Override
     protected Component createContent(TextField userNameField, PasswordField passwordField, Button loginButton) {
@@ -23,14 +27,5 @@ public class Login extends LoginForm{
         layout.addComponent(loginButton);
         layout.setComponentAlignment(loginButton, Alignment.BOTTOM_LEFT);
         return layout;
-    }
-    // You can also override this method to handle the login directly, instead of using the event mechanism
-   /* @Override
-    protected void login(String userName, String password) {
-        System.err.println(
-            "Logged in with user name (Overrride)" + userName +
-            " and password of length " + password.length()
-        );
-    }*/
-	
+    }	
 }

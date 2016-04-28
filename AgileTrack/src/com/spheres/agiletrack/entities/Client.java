@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the Client database table.
+ * The persistent class for the CLIENT database table.
  * 
  */
 @Entity
@@ -15,8 +15,8 @@ public class Client implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="starlink_id")
-	private int starlinkId;
+	@Column(name="client_id")
+	private int clientId;
 
 	@Column(name="client_login")
 	private String clientLogin;
@@ -30,12 +30,12 @@ public class Client implements Serializable {
 	public Client() {
 	}
 
-	public int getStarlinkId() {
-		return this.starlinkId;
+	public int getClientId() {
+		return this.clientId;
 	}
 
-	public void setStarlinkId(int starlinkId) {
-		this.starlinkId = starlinkId;
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 
 	public String getClientLogin() {

@@ -6,7 +6,7 @@ import java.util.List;
 
 
 /**
- * The persistent class for the Command database table.
+ * The persistent class for the COMMAND database table.
  * 
  */
 @Entity
@@ -24,10 +24,10 @@ public class Command implements Serializable {
 	private String description;
 
 	@Column(name="is_server")
-	private boolean isServer;
+	private byte isServer;
 
 	@Column(name="is_slu")
-	private boolean isSlu;
+	private byte isSlu;
 
 	//bi-directional many-to-one association to Part
 	@OneToMany(mappedBy="command")
@@ -60,19 +60,19 @@ public class Command implements Serializable {
 		this.description = description;
 	}
 
-	public boolean getIsServer() {
+	public byte getIsServer() {
 		return this.isServer;
 	}
 
-	public void setIsServer(boolean isServer) {
+	public void setIsServer(byte isServer) {
 		this.isServer = isServer;
 	}
 
-	public boolean getIsSlu() {
+	public byte getIsSlu() {
 		return this.isSlu;
 	}
 
-	public void setIsSlu(boolean isSlu) {
+	public void setIsSlu(byte isSlu) {
 		this.isSlu = isSlu;
 	}
 

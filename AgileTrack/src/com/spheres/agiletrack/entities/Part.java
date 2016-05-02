@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the Part database table.
+ * The persistent class for the PART database table.
  * 
  */
 @Entity

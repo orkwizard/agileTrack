@@ -32,9 +32,9 @@ public class MainView extends VerticalLayout {
 	protected NativeButton btDashboard;
 	protected NativeButton btUnidades;
 	protected NativeButton btReportes;
-	protected NativeButton btStarLink;
 	protected NativeButton menuButton5;
 	protected NativeButton menuButton6;
+	protected NativeButton btStarLink;
 	protected NativeButton menuButton7;
 	protected NativeButton btConfig;
 	protected Panel scroll_panel;

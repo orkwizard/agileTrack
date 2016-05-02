@@ -103,6 +103,7 @@ public class CommandVIew extends CommandModel implements View {
 
 	 private void addNewCommand(){
 		 
+		 
 	 }
 
 	 

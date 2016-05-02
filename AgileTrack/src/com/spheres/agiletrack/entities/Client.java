@@ -2,6 +2,7 @@ package com.spheres.agiletrack.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -26,6 +27,14 @@ public class Client implements Serializable {
 
 	@Column(name="client_password")
 	private String clientPassword;
+
+	//bi-directional many-to-one association to Starlink
+	@OneToMany(mappedBy="client")
+	private List<Starlink> starlinks;
+
+	//bi-directional many-to-one association to Unit
+	@OneToMany(mappedBy="client")
+	private List<Unit> units;
 
 	public Client() {
 	}
@@ -60,6 +69,50 @@ public class Client implements Serializable {
 
 	public void setClientPassword(String clientPassword) {
 		this.clientPassword = clientPassword;
+	}
+
+	public List<Starlink> getStarlinks() {
+		return this.starlinks;
+	}
+
+	public void setStarlinks(List<Starlink> starlinks) {
+		this.starlinks = starlinks;
+	}
+
+	public Starlink addStarlink(Starlink starlink) {
+		getStarlinks().add(starlink);
+		starlink.setClient(this);
+
+		return starlink;
+	}
+
+	public Starlink removeStarlink(Starlink starlink) {
+		getStarlinks().remove(starlink);
+		starlink.setClient(null);
+
+		return starlink;
+	}
+
+	public List<Unit> getUnits() {
+		return this.units;
+	}
+
+	public void setUnits(List<Unit> units) {
+		this.units = units;
+	}
+
+	public Unit addUnit(Unit unit) {
+		getUnits().add(unit);
+		unit.setClient(this);
+
+		return unit;
+	}
+
+	public Unit removeUnit(Unit unit) {
+		getUnits().remove(unit);
+		unit.setClient(null);
+
+		return unit;
 	}
 
 }

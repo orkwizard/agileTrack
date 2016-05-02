@@ -28,8 +28,8 @@ public class DashboardImp extends Dashboard implements View{
 	
 	private void addChart(){
 		Chart chart = new Chart(ChartType.BAR);
-		chart.setWidth("400px");
-		chart.setHeight("300px");
+		chart.setWidth("365px");
+		chart.setHeight("250px");
 
 		// Modify the default configuration a bit
 		Configuration conf = chart.getConfiguration();

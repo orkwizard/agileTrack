@@ -1,21 +1,26 @@
 package com.spheres.agiletrack.view;
 
 
-import com.spheres.agiletrack.app.Dashboard;
+import java.util.Iterator;
+
 import com.spheres.agiletrack.app.DashboardImp;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.navigator.ViewDisplay;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
-public class MainViewImpl extends MainView implements View{
+public class MainViewImpl extends MainView implements ViewDisplay{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final String STYLE_SELECTED = "selected";
 	public static final String VIEW_NAME = "main";
 	Navigator nav;
+	
 	
 	public MainViewImpl(){
 		super();
@@ -26,24 +31,50 @@ public class MainViewImpl extends MainView implements View{
 		if(nav.getState().isEmpty()){
 			nav.navigateTo(DashboardImp.VIEW_NAME);
 		}
+		btConfig.addClickListener(event -> 	doNavigate(CommandVIew.VIEW_NAME));
+		btDashboard.addClickListener(event-> doNavigate(DashboardImp.VIEW_NAME));
 	}
 
 	
 	
 	
-	/*
-	public void navAdd(){
-		nav.addView("command",CommandVIew.class);
-		nav.addView("main", this.getClass());
-		if(nav.getState().isEmpty()){
-			
-		}
-	}*/
+	private void addNavigatorView(String viewName,Class<? extends View> viewClass, Button menuButton) {
+        nav.addView(viewName, viewClass);
+        menuButton.addClickListener(event -> doNavigate(viewName));
+        menuButton.setData(viewClass.getName());
+    }
 	
-	@Override
-	public void enter(ViewChangeEvent event) {
-		// TODO Auto-generated method stub
-		
+	
+	private void doNavigate(String viewName) {
+		UI.getCurrent().getNavigator().navigateTo(viewName);
 	}
+
+
+
+
+	@Override
+    public void showView(View view) {
+        if (view instanceof Component) {
+            scroll_panel.setContent((Component) view);
+            Iterator it = side_bar.iterator();
+            while (it.hasNext()) {
+                adjustStyleByData(it.next(), view.getClass().getName());
+            }
+        } else {
+            throw new IllegalArgumentException("View is not a Component");
+        }
+    }
+	
+	
+
+	private void adjustStyleByData(Object component, Object data) {
+	        if (component instanceof Button) {
+	            if (data != null && data.equals(((Button) component).getData())) {
+	                ((Button)component).addStyleName(STYLE_SELECTED);
+	            } else {
+	            	((Button)component).removeStyleName(STYLE_SELECTED);
+	            }
+	        }
+	    }
 
 }

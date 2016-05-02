@@ -24,10 +24,10 @@ public class Command implements Serializable {
 	private String description;
 
 	@Column(name="is_server")
-	private byte isServer;
+	private boolean isServer;
 
 	@Column(name="is_slu")
-	private byte isSlu;
+	private boolean isSlu;
 
 	//bi-directional many-to-one association to Part
 	@OneToMany(mappedBy="command")
@@ -60,19 +60,19 @@ public class Command implements Serializable {
 		this.description = description;
 	}
 
-	public byte getIsServer() {
+	public boolean getIsServer() {
 		return this.isServer;
 	}
 
-	public void setIsServer(byte isServer) {
+	public void setIsServer(boolean isServer) {
 		this.isServer = isServer;
 	}
 
-	public byte getIsSlu() {
+	public boolean getIsSlu() {
 		return this.isSlu;
 	}
 
-	public void setIsSlu(byte isSlu) {
+	public void setIsSlu(boolean isSlu) {
 		this.isSlu = isSlu;
 	}
 

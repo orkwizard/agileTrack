@@ -64,7 +64,7 @@ public class AgiletrackUI extends UI {
 	        	
 	        }
 	        else{
-	        	raiseError(new Notification("Usuario / Password Erroneo",Notification.Type.ERROR_MESSAGE));
+	        	raiseError(new Notification("Usuario / Password Erroneo",Notification.Type.HUMANIZED_MESSAGE));
 	        	
 	        	
 	        	

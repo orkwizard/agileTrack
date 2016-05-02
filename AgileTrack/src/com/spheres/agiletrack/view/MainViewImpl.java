@@ -4,9 +4,11 @@ package com.spheres.agiletrack.view;
 import java.util.Iterator;
 
 import com.spheres.agiletrack.app.DashboardImp;
+import com.spheres.agiletrack.entities.Client;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
@@ -26,8 +28,8 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 		super();
 		nav = new Navigator(UI.getCurrent(),scroll_panel);
 		//nav.addView(VIEW_NAME, MainViewImpl.class);
-		nav.addView(CommandVIew.VIEW_NAME, CommandVIew.class);
-		nav.addView(DashboardImp.VIEW_NAME, DashboardImp.class);
+		addNavigatorView(CommandVIew.VIEW_NAME, CommandVIew.class,btConfig);
+		addNavigatorView(DashboardImp.VIEW_NAME, DashboardImp.class,btDashboard);
 		if(nav.getState().isEmpty()){
 			nav.navigateTo(DashboardImp.VIEW_NAME);
 		}
@@ -47,9 +49,14 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 	
 	private void doNavigate(String viewName) {
 		UI.getCurrent().getNavigator().navigateTo(viewName);
+		
 	}
 
 
+	 private Client getCurrentUser() {
+	        return (Client) VaadinSession.getCurrent().getAttribute(
+	                Client.class.getName());
+	    }
 
 
 	@Override

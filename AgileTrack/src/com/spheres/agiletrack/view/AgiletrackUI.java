@@ -1,28 +1,25 @@
 package com.spheres.agiletrack.view;
 
-import java.util.Iterator;
-
 import javax.servlet.annotation.WebServlet;
 
-import com.ejt.vaadin.loginform.LoginForm.LoginEvent;
-import com.ejt.vaadin.loginform.LoginForm.LoginListener;
+import com.google.common.eventbus.Subscribe;
+import com.spheres.agiletrack.data.JPADataProvider;
+import com.spheres.agiletrack.domain.DataProvider;
 import com.spheres.agiletrack.entities.Client;
+import com.spheres.agiletrack.event.AgileEvent.UserLoginRequestedEvent;
+import com.spheres.agiletrack.event.AgileEventBus;
 import com.spheres.agiletrack.view.forms.authentication.Login;
-import com.vaadin.addon.jpacontainer.JPAContainer;
-import com.vaadin.addon.jpacontainer.JPAContainerFactory;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
-import com.vaadin.data.Container.Filter;
-import com.vaadin.data.util.filter.Compare;
-import com.vaadin.server.ErrorMessage;
-import com.vaadin.data.Container.Filter;
-import com.vaadin.data.util.filter.Compare;
-import com.vaadin.server.ErrorMessage;
 import com.vaadin.server.Page;
+import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.themes.ValoTheme;
 
 
 @SuppressWarnings("serial")
@@ -31,9 +28,12 @@ import com.vaadin.ui.UI;
 
 public class AgiletrackUI extends UI {
 	protected static final String MAINVIEW = "main";
-	private final static String Persistence_UNIT ="Agile";
+	//private final static String Persistence_UNIT ="Agile";
+	private final AgileEventBus agileEventbus = new AgileEventBus();
+	private final DataProvider dataProvider = new JPADataProvider();
 	
-	Login loginForm = new Login();
+	Login loginForm;
+	MainViewImpl main;
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = AgiletrackUI.class)
 	
@@ -44,36 +44,52 @@ public class AgiletrackUI extends UI {
 	@Override
 	protected void init(VaadinRequest request) {
 		getPage().setTitle("AgileTrack");
-		JPAContainer<Client> clientes = JPAContainerFactory.makeReadOnly(Client.class,Persistence_UNIT);
-		final MainViewImpl main = new MainViewImpl();
+		
+		AgileEventBus.register(this);
+	    Responsive.makeResponsive(this);
+	    addStyleName(ValoTheme.UI_WITH_MENU);
+		loginForm = new Login();
 		loginForm.clear();
 		setContent(loginForm);
-		
-		
-		loginForm.addLoginListener(new LoginListener() {
-			
-			@Override
-			public void onLogin(LoginEvent event) {
-				// TODO Auto-generated method stub
-				clientes.removeAllContainerFilters();
-				Filter filter = new Compare.Equal("clientLogin",event.getUserName());
-				Filter filter2 = new Compare.Equal("clientPassword", event.getPassword().trim());
-				clientes.addContainerFilter(filter);
-				clientes.addContainerFilter(filter2);
-				if(clientes.size()>0){
-					String  itemId = clientes.getItemIds().iterator().next().toString();
-					System.out.println(itemId);
-					String name = clientes.getItem(Integer.parseInt(itemId)).getEntity().getClientName();
-					main.user_name_label.setValue(name);
-					setContent(main);
-				}
-				else{
-					System.out.println("Error Wrong Password");
-					//loginForm.setErrorHandler(getErrorHandler());
-				}
-				
-			}
-		});
+	}
+
+	 @Subscribe
+	    public void userLoginRequested(final UserLoginRequestedEvent event) {
+	        Client user = getDataProvider().authenticate(event.getUserName(),
+	                event.getPassword());
+	        
+	        if(user!=null){
+	        	VaadinSession.getCurrent().setAttribute(Client.class.getName(), user);
+	        	startSession();
+	        	
+	        }
+	        else{
+	        	raiseError(new Notification("Usuario / Password Erroneo",Notification.Type.ERROR_MESSAGE));
+	        	
+	        	
+	        	
+	        }
+	        //FALTA AGREGAR CONTENIDO!!!!
+	        
+	        //updateContent();
+	    }
+	
+	 private void raiseError(Notification notification) {
+		// TODO Auto-generated method stub
+		notification.show(Page.getCurrent());
+	}
+
+	private void startSession(){
+		 main = new MainViewImpl();
+		 setContent(main);
+	 }
+	 
+	 public static DataProvider getDataProvider() {
+	        return ((AgiletrackUI) getCurrent()).dataProvider;
+	    }
+
+	public static AgileEventBus getAgileEventbus() {
+		return ((AgiletrackUI) getCurrent()).agileEventbus;
 	}
 
 }

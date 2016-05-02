@@ -49,7 +49,7 @@
    		<dependency org="org.vaadin.addons" name="loginform" rev="0.6.2" />
    		<dependency org="com.vaadin.addon" name="vaadin-charts" rev="3.0.0-beta1" />
    		<dependency org="com.vaadin.tapio" name="googlemaps" rev="1.2.1" />
-   		
+   		<dependency org="com.google.guava" name="guava" rev="19.0" />
    			
 	</dependencies>
 

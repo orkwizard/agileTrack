@@ -1,6 +1,8 @@
 package com.spheres.agiletrack.view.forms.authentication;
 
 import com.ejt.vaadin.loginform.LoginForm;
+import com.spheres.agiletrack.event.AgileEventBus;
+import com.spheres.agiletrack.event.AgileEvent.UserLoginRequestedEvent;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
@@ -14,17 +16,16 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class Login extends LoginForm{
-
 	
 	public Login(){
 		super();
 		setSizeFull();
 	}
-	
-	
 	
 	/**
 	 * 
@@ -44,24 +45,6 @@ public class Login extends LoginForm{
         layout.addStyleName("login-panel");
         layout.addComponent(loginForm);
         layout.setComponentAlignment(loginForm, Alignment.MIDDLE_CENTER);
-        //addComponent(loginForm);
-        //setComponentAlignment(loginForm, Alignment.MIDDLE_CENTER);
-        /*
-        userNameField.setIcon(FontAwesome.USER);
-        userNameField.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
-        
-        passwordField.setIcon(FontAwesome.LOCK);
-        passwordField.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
-        
-        loginButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
-        loginButton.setClickShortcut(KeyCode.ENTER);
-        loginButton.focus();
-        
-        layout.addComponent(userNameField);
-        layout.addComponent(passwordField);
-        layout.addComponent(loginButton);
-        layout.setComponentAlignment(loginButton, Alignment.BOTTOM_LEFT);
-        */
         return layout;
     }
 
@@ -76,6 +59,8 @@ public class Login extends LoginForm{
         loginPanel.addComponent(buildLabels());
         loginPanel.addComponent(buildFields());
         loginPanel.addComponent(new CheckBox("Recordarme", true));
+        
+        
         return loginPanel;
 
 	}
@@ -99,7 +84,16 @@ public class Login extends LoginForm{
         loginButton.focus();
         fields.addComponents(userNameField, passwordField, loginButton);
         fields.setComponentAlignment(loginButton, Alignment.BOTTOM_LEFT);
-
+        
+        loginButton.addClickListener(new ClickListener() {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public void buttonClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				AgileEventBus.post(new UserLoginRequestedEvent(userNameField.getValue(), passwordField.getValue()));
+				
+			}
+		});
         return fields;
 	}
 
@@ -107,13 +101,11 @@ public class Login extends LoginForm{
 	private Component buildLabels() {
 		CssLayout labels = new CssLayout();
         labels.addStyleName("labels");
-
         Label welcome = new Label("Bienvenido a AgileTrack");
         welcome.setSizeUndefined();
         welcome.addStyleName(ValoTheme.LABEL_H4);
         welcome.addStyleName(ValoTheme.LABEL_COLORED);
         labels.addComponent(welcome);
-
         return labels;
 	}	
 }

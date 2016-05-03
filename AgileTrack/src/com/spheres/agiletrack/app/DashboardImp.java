@@ -11,6 +11,10 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 
 public class DashboardImp extends Dashboard implements View{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2045732231532159610L;
 	public static final String VIEW_NAME = "dashboard";
 	@Override
 	public void enter(ViewChangeEvent event) {

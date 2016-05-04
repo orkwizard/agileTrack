@@ -20,9 +20,9 @@ public class JPADataProvider implements DataProvider {
 		Filter filter2 = new Compare.Equal("clientPassword", password.trim());
 		clientes.addContainerFilter(filter);
 		clientes.addContainerFilter(filter2);
-		if(clientes.size()>0)
+		if(clientes.size()>0){
 			return new Client();
-		
+		}
 		return null;
 	}
 

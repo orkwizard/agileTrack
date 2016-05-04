@@ -4,11 +4,14 @@ import com.spheres.agiletrack.entities.Command;
 import com.spheres.agiletrack.entities.Part;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
+import com.vaadin.addon.jpacontainer.fieldfactory.FieldFactory;
+import com.vaadin.addon.jpacontainer.fieldfactory.MasterDetailEditor;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.util.filter.Compare.Equal;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 
@@ -23,6 +26,7 @@ public class CommandVIew extends CommandModel implements View {
 	private final static String Persistence_UNIT ="Agile";
 	private Command commandFilter;
 	public static final String VIEW_NAME = "command_view";
+	
 	
 	
 	@Override
@@ -40,8 +44,10 @@ public class CommandVIew extends CommandModel implements View {
 		public void valueChange(ValueChangeEvent event) {
 				// TODO Auto-generated method stub
 				Object id = event.getProperty().getValue();
+				FieldFactory fieldFactory = new FieldFactory();
 				if(id!=null)
 					commandFilter = commands.getItem(id).getEntity();
+				
 				populateGrid();
 			}
 		});
@@ -69,7 +75,10 @@ public class CommandVIew extends CommandModel implements View {
 		// TODO Auto-generated constructor stub
 		 commands = JPAContainerFactory.make(Command.class,Persistence_UNIT);
 		 parts = JPAContainerFactory.make(Part.class,Persistence_UNIT);
-		 populateCommands();		 
+		 populateCommands();	
+		
+		 
+		 
 		 super.btNew.addClickListener(new ClickListener() {
 			
 			@Override

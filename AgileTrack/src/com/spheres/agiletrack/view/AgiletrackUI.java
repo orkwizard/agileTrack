@@ -61,17 +61,12 @@ public class AgiletrackUI extends UI {
 	        if(user!=null){
 	        	VaadinSession.getCurrent().setAttribute(Client.class.getName(), user);
 	        	startSession();
+	        	VaadinSession.getCurrent().setAttribute("UserName", user.getClientName());
 	        	
 	        }
 	        else{
-	        	raiseError(new Notification("Usuario / Password Erroneo",Notification.Type.HUMANIZED_MESSAGE));
-	        	
-	        	
-	        	
+	        	raiseError(new Notification("Usuario / Password Erroneo",Notification.Type.HUMANIZED_MESSAGE));	
 	        }
-	        //FALTA AGREGAR CONTENIDO!!!!
-	        
-	        //updateContent();
 	    }
 	
 	 private void raiseError(Notification notification) {
@@ -82,6 +77,7 @@ public class AgiletrackUI extends UI {
 	private void startSession(){
 		 main = new MainViewImpl();
 		 setContent(main);
+		
 	 }
 	 
 	 public static DataProvider getDataProvider() {

@@ -32,7 +32,7 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 		super();
 		nav = new Navigator(UI.getCurrent(),(ViewDisplay) this);
 		//nav.addView(VIEW_NAME, MainViewImpl.class);
-		user_name_label.setValue(getCurrentUser().getClientName());
+		user_name_label.setValue(getCurrentUser());
 		
 		addNavigatorView(CommandVIew.VIEW_NAME, CommandVIew.class,btConfig);
 		addNavigatorView(DashboardImp.VIEW_NAME, DashboardImp.class,btDashboard);
@@ -66,9 +66,9 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 	}
 
 
-	 private Client getCurrentUser() {
-	        return (Client) VaadinSession.getCurrent().getAttribute(
-	                Client.class.getName());
+	 private String getCurrentUser() {
+	        return (String) VaadinSession.getCurrent().getAttribute(
+	                "UserName");
 	    }
 
 

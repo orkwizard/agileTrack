@@ -31,5 +31,4 @@ public class JPADataProvider implements DataProvider {
 		}
 		return null;
 	}
-
 }

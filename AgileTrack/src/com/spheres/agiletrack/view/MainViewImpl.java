@@ -3,12 +3,17 @@ package com.spheres.agiletrack.view;
 
 import java.util.Iterator;
 
+import com.google.common.eventbus.Subscribe;
 import com.spheres.agiletrack.app.DashboardImp;
 import com.spheres.agiletrack.entities.Client;
+import com.spheres.agiletrack.event.AgileEvent;
+import com.spheres.agiletrack.event.AgileEventBus;
 import com.spheres.agiletrack.view.forms.ConfigurationTabsViewImp;
+import com.vaadin.demo.dashboard.event.DashboardEvent.UserLoggedOutEvent;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
+import com.vaadin.server.Page;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
@@ -33,7 +38,6 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 		super();
 		nav = new Navigator(UI.getCurrent(),(ViewDisplay) this);
 		user = getCurrentUser();
-		//user_name_label.setValue(getCurrentUser().getClientName());
 		addNavigatorView(ConfigurationTabsViewImp.VIEW_NAME,ConfigurationTabsViewImp.class,btConfig);
 		addNavigatorView(DashboardImp.VIEW_NAME, DashboardImp.class,btDashboard);
 		buildMenuBar();
@@ -46,6 +50,14 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 	}
 	
 	
+	@Subscribe
+    public void userLoggedOut() {
+        // When the user logs out, current VaadinSession gets closed and the
+        // page gets reloaded on the login screen. Do notice the this doesn't
+        // invalidate the current HttpSession.
+        VaadinSession.getCurrent().close();
+        Page.getCurrent().reload();
+    }
 	
 
 	private void buildMenuBar() {
@@ -67,6 +79,7 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 	    menuBar.addItem("Log Out", new Command() {
 	         @Override
 	         public void menuSelected(final MenuItem selectedItem) {
+	        	 	AgileEventBus.post(new UserLoggedOutEvent());
 	                //DashboardEventBus.post(new UserLoggedOutEvent());
 	        	 System.out.println("Logout");
 	         }

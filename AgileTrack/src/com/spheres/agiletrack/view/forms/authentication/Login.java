@@ -6,6 +6,7 @@ import com.spheres.agiletrack.event.AgileEvent.UserLoginRequestedEvent;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
@@ -55,7 +56,8 @@ public class Login extends LoginForm{
         loginPanel.setSpacing(true);
         Responsive.makeResponsive(loginPanel);
         loginPanel.addStyleName("login-panel");
-
+        //loginPanel.addComponent(new ThemeResource(
+        //        "img/agile.jpg"));
         loginPanel.addComponent(buildLabels());
         loginPanel.addComponent(buildFields());
         loginPanel.addComponent(new CheckBox("Recordarme", true));

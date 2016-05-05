@@ -5,16 +5,16 @@ import java.util.Iterator;
 
 import com.spheres.agiletrack.app.DashboardImp;
 import com.spheres.agiletrack.entities.Client;
-import com.vaadin.event.LayoutEvents.LayoutClickEvent;
-import com.vaadin.event.LayoutEvents.LayoutClickListener;
+import com.spheres.agiletrack.view.forms.ConfigurationTabsViewImp;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.navigator.ViewDisplay;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.MenuBar.Command;
+import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.UI;
 
 public class MainViewImpl extends MainView implements ViewDisplay{
@@ -26,31 +26,57 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 	private static final String STYLE_SELECTED = "selected";
 	public static final String VIEW_NAME = "main";
 	private Navigator nav;
-	
+	private MenuItem settingsItem;
+	final private Client user;
 	
 	public MainViewImpl(){
 		super();
 		nav = new Navigator(UI.getCurrent(),(ViewDisplay) this);
-		//nav.addView(VIEW_NAME, MainViewImpl.class);
-		user_name_label.setValue(getCurrentUser());
-		
-		addNavigatorView(CommandVIew.VIEW_NAME, CommandVIew.class,btConfig);
+		user = getCurrentUser();
+		//user_name_label.setValue(getCurrentUser().getClientName());
+		addNavigatorView(ConfigurationTabsViewImp.VIEW_NAME,ConfigurationTabsViewImp.class,btConfig);
 		addNavigatorView(DashboardImp.VIEW_NAME, DashboardImp.class,btDashboard);
-		
+		buildMenuBar();
 		if(nav.getState().isEmpty()){
 			nav.navigateTo(DashboardImp.VIEW_NAME);
 		}
 		else {
             nav.navigateTo(nav.getState());
         }
-		
-		
-		//btConfig.addClickListener(event -> 	doNavigate(CommandVIew.VIEW_NAME));
-		//btDashboard.addClickListener(event-> doNavigate(DashboardImp.VIEW_NAME));
 	}
 	
 	
 	
+
+	private void buildMenuBar() {
+		// TODO Auto-generated method stub
+	
+		menuBar.setCaption("");
+		menuBar.addStyleName("user-menu");
+		menuBar.addItem("", new ThemeResource(
+                "img/profile-pic-300px.jpg"), null);
+		//menuBar.setCaption(user.getClientName());
+		menuBar.addItem("Editar Perfil", new Command(){
+			@Override
+			public void menuSelected(MenuItem selectedItem) {
+				// TODO Auto-generated method stub
+				System.out.println("Click Editar Perfil");
+			}
+		});
+		 
+	    menuBar.addItem("Log Out", new Command() {
+	         @Override
+	         public void menuSelected(final MenuItem selectedItem) {
+	                //DashboardEventBus.post(new UserLoggedOutEvent());
+	        	 System.out.println("Logout");
+	         }
+	     });
+	     
+	     menuBar.setVisible(true);
+	}
+
+
+
 
 	private void addNavigatorView(String viewName,Class<? extends View> viewClass, Button menuButton) {
         nav.addView(viewName, viewClass);
@@ -66,9 +92,11 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 	}
 
 
-	 private String getCurrentUser() {
-	        return (String) VaadinSession.getCurrent().getAttribute(
-	                "UserName");
+	 private Client getCurrentUser() {
+		 	Client c = (Client) VaadinSession.getCurrent().getAttribute(Client.class.getName());
+		 	System.out.println("Current User " + c.getClientName());
+	        return c;
+	       
 	    }
 
 

@@ -55,13 +55,18 @@ public class AgiletrackUI extends UI {
 
 	 @Subscribe
 	    public void userLoginRequested(final UserLoginRequestedEvent event) {
-	        Client user = getDataProvider().authenticate(event.getUserName(),
-	                event.getPassword());
+	      
 	        
-	        if(user!=null){
-	        	VaadinSession.getCurrent().setAttribute(Client.class.getName(), user);
+	        Client c = getDataProvider().authenticate(event.getUserName(),event.getPassword());
+	        
+	        
+	        if(c!=null){
+	        	
+	        	System.out.println("Entity :"+ c.getClass().getName()  + "Values: "  +c.getClientName()+" "+ c.getClientLogin());
+	        	
+	        	VaadinSession.getCurrent().setAttribute(Client.class.getName(), c);
 	        	startSession();
-	        	VaadinSession.getCurrent().setAttribute("UserName", user.getClientName());
+	        	VaadinSession.getCurrent().setAttribute("UserName", c.getClientName());
 	        	
 	        }
 	        else{

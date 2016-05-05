@@ -19,35 +19,9 @@ import com.vaadin.ui.declarative.Design;
 @SuppressWarnings("serial")
 public class Dashboard extends CssLayout {
 	protected Label billing_header_label;
-	protected CssLayout dashboard_item5;
-	protected Label dashboard_item_header;
-	protected Label statistics_label;
-	protected Label statistics_label2;
-	protected Label statistics_label4;
-	protected Label statistics_label3;
-	protected Label statistics_label5;
-	protected CssLayout dashboard_item26;
-	protected Label dashboard_item_header2;
-	protected Label statistics_label6;
-	protected Label statistics_label7;
-	protected Label statistics_label8;
-	protected Label statistics_label9;
-	protected Label statistics_label10;
-	protected CssLayout dashboard_item27;
-	protected Label dashboard_item_header3;
-	protected Label statistics_label18;
-	protected Label statistics_label12;
-	protected Label statistics_label16;
-	protected Label statistics_label17;
-	protected Label statistics_label19;
-	protected CssLayout dashboard_item28;
-	protected Label dashboard_item_header4;
-	protected Label statistics_label20;
-	protected Label statistics_label21;
-	protected Label statistics_label22;
-	protected Label statistics_label23;
-	protected Label statistics_label24;
+	protected CssLayout dashgraphics;
 	protected CssLayout dashboardpane;
+	protected CssLayout dashboardmaps;
 
 	public Dashboard() {
 		Design.read(this);

@@ -6,11 +6,8 @@
  </head> 
  <body> 
   <vaadin-vertical-layout style-name="root-layout navigation-template-vaadin" responsive size-full _id="root_layout"> 
-   <vaadin-css-layout style-name="header-bar" width-full _id="header_bar"> 
-    <vaadin-native-button icon="fonticon://FontAwesome/f078" style-name="user-menu" width="20px" height="20px" plain-text _id="user_menu"></vaadin-native-button> 
-    <vaadin-label style-name="user-name-label" width="79px" _id="user_name_label">
-      John Doe 
-    </vaadin-label> 
+   <vaadin-css-layout style-name="header-bar" width-full _id="header_bar" :middle :center> 
+    <vaadin-menu-bar style-name="user-menu" width="127px" plain-text _id="menuBar"></vaadin-menu-bar> 
     <vaadin-text-field icon="fonticon://FontAwesome/f002" input-prompt="Busqueda...." style-name="search-field" _id="search_field"></vaadin-text-field> 
    </vaadin-css-layout> 
    <vaadin-horizontal-layout style-name="main-area-layout" size-full _id="main_area" :expand> 
@@ -24,8 +21,8 @@
      <vaadin-native-button icon="fonticon://FontAwesome/f0f6" style-name="menu-button" width-full plain-text _id="btReportes">
        Reportes 
      </vaadin-native-button> 
-     <vaadin-native-button icon="fonticon://FontAwesome/f05a" style-name="menu-button" width-full plain-text _id="menuButton5">
-       About 
+     <vaadin-native-button icon="fonticon://FontAwesome/f278" style-name="menu-button" width-full plain-text _id="btMaps">
+       Mapas 
      </vaadin-native-button> 
      <vaadin-native-button icon="fonticon://FontAwesome/f05a" style-name="menu-button" width-full plain-text _id="menuButton6">
        About 
@@ -40,7 +37,7 @@
        Configuracion 
      </vaadin-native-button> 
     </vaadin-css-layout> 
-    <vaadin-panel style-name="scroll-panel" size-full _id="scroll_panel" :expand></vaadin-panel> 
+    <vaadin-panel style-name="scroll-panel" size-full _id="scroll_panel" :middle :center :expand></vaadin-panel> 
    </vaadin-horizontal-layout> 
   </vaadin-vertical-layout>  
  </body>

@@ -7,9 +7,9 @@ import com.google.common.eventbus.Subscribe;
 import com.spheres.agiletrack.app.DashboardImp;
 import com.spheres.agiletrack.entities.Client;
 import com.spheres.agiletrack.event.AgileEvent;
+import com.spheres.agiletrack.event.AgileEvent.UserLoggedOutEvent;
 import com.spheres.agiletrack.event.AgileEventBus;
 import com.spheres.agiletrack.view.forms.ConfigurationTabsViewImp;
-import com.vaadin.demo.dashboard.event.DashboardEvent.UserLoggedOutEvent;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
@@ -50,14 +50,14 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 	}
 	
 	
-	@Subscribe
-    public void userLoggedOut() {
-        // When the user logs out, current VaadinSession gets closed and the
-        // page gets reloaded on the login screen. Do notice the this doesn't
-        // invalidate the current HttpSession.
-        VaadinSession.getCurrent().close();
-        Page.getCurrent().reload();
-    }
+	 @Subscribe
+	    public void UserLoggedOut(final UserLoggedOutEvent event) {
+	        // When the user logs out, current VaadinSession gets closed and the
+	        // page gets reloaded on the login screen. Do notice the this doesn't
+	        // invalidate the current HttpSession.
+	        VaadinSession.getCurrent().close();
+	        Page.getCurrent().reload();
+	    }
 	
 
 	private void buildMenuBar() {

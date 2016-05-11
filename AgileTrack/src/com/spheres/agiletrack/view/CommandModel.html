@@ -1,34 +1,42 @@
 <!doctype html>
 <html>
- <head> 
+ <head>
   <meta charset="UTF-8" name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src&quot;,&quot;THEME&quot;:&quot;agiletrack&quot;}">
   <meta charset="UTF-8" name="package-mapping" content="com_vaadin_addon_jpacontainer_fieldfactory:com.vaadin.addon.jpacontainer.fieldfactory">
+  <meta charset="UTF-8" name="package-mapping" content="com_spheres_agiletrack_view_forms:com.spheres.agiletrack.view.forms">
  </head> 
  <body> 
   <vaadin-vertical-layout> 
-   <vaadin-form-layout responsive width="900px" margin-top="false" margin-bottom="false" :middle> 
-    <vaadin-grid-layout spacing width="577px"> 
-     <row> 
-      <column></column> 
-      <column></column> 
-     </row> 
-    </vaadin-grid-layout> 
-    <vaadin-horizontal-layout> 
-     <vaadin-combo-box caption="Comandos Disponibles" style-name="large align-center" item-caption-mode="id" width="496px" _id="cbCommand"></vaadin-combo-box> 
-     <vaadin-button style-name="friendly large" plain-text _id="btAddCommand" :bottom :center>
-       + 
-     </vaadin-button> 
-    </vaadin-horizontal-layout> 
-    <vaadin-table width="866px" height="271px" _id="table_parrs"></vaadin-table> 
-    <vaadin-horizontal-layout spacing width="500px" margin :middle :center> 
-     <vaadin-button style-name="friendly" plain-text _id="btNew" :middle :center>
-       Agregar 
-     </vaadin-button> 
-     <vaadin-button style-name="danger" plain-text _id="btDelete" :middle :center>
-       Borrar 
-     </vaadin-button> 
-    </vaadin-horizontal-layout> 
-   </vaadin-form-layout> 
+   <vaadin-horizontal-split-panel width="900px" height="600px" split-position="29.625%"> 
+    <vaadin-vertical-layout size-full> 
+     <vaadin-tree style-name="borderless compact" item-caption-mode="id" size-full _id="tree_commands" :expand></vaadin-tree> 
+     <vaadin-horizontal-layout spacing margin> 
+      <vaadin-button style-name="friendly large" plain-text _id="btAddCommand" :bottom :center>
+        + 
+      </vaadin-button> 
+      <vaadin-button style-name="large danger" plain-text _id="btEraseCommand">
+        - 
+      </vaadin-button> 
+     </vaadin-horizontal-layout> 
+    </vaadin-vertical-layout> 
+    <vaadin-vertical-layout size-auto> 
+     <vaadin-vertical-layout size-auto> 
+      <com_spheres_agiletrack_view_forms-command-editor-imp width="562px" height="335px"></com_spheres_agiletrack_view_forms-command-editor-imp> 
+     </vaadin-vertical-layout> 
+     <vaadin-horizontal-layout spacing width="542px" :center> 
+      <vaadin-table width="554px" height="271px" _id="table_parrs"></vaadin-table> 
+      <vaadin-button style-name="danger" plain-text _id="btDelete" :middle :center>
+        Borrar 
+      </vaadin-button> 
+      <vaadin-button style-name="friendly" plain-text _id="btPartNew" :middle :center>
+        Agregar 
+      </vaadin-button> 
+      <vaadin-button style-name="friendly" plain-text _id="btPartEdit">
+        Actualizar 
+      </vaadin-button> 
+     </vaadin-horizontal-layout> 
+    </vaadin-vertical-layout> 
+   </vaadin-horizontal-split-panel> 
   </vaadin-vertical-layout>  
  </body>
 </html>

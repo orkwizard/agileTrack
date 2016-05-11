@@ -51,10 +51,11 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 	
 	
 	 @Subscribe
-	    public void UserLoggedOut(final UserLoggedOutEvent event) {
+	    public void UserLoggedOut() {
 	        // When the user logs out, current VaadinSession gets closed and the
 	        // page gets reloaded on the login screen. Do notice the this doesn't
 	        // invalidate the current HttpSession.
+		 	System.out.println("Logout");
 	        VaadinSession.getCurrent().close();
 	        Page.getCurrent().reload();
 	    }
@@ -79,9 +80,11 @@ public class MainViewImpl extends MainView implements ViewDisplay{
 	    menuBar.addItem("Log Out", new Command() {
 	         @Override
 	         public void menuSelected(final MenuItem selectedItem) {
+	        	    System.out.println("Logout");
 	        	 	AgileEventBus.post(new UserLoggedOutEvent());
-	                //DashboardEventBus.post(new UserLoggedOutEvent());
-	        	 System.out.println("Logout");
+	        	 	VaadinSession.getCurrent().close();
+	     	        Page.getCurrent().reload();
+	        	 
 	         }
 	     });
 	     

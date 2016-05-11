@@ -2,7 +2,6 @@ package com.spheres.agiletrack.core.server;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteOrder;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import org.jboss.netty.bootstrap.Bootstrap;
@@ -19,6 +18,8 @@ import org.jboss.netty.channel.group.ChannelGroupFuture;
 import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 
+import com.spheres.agiletrack.core.server.test.EchoServerHandler;
+
 
 /* 
  	AgileTrack Server 
@@ -33,6 +34,10 @@ public abstract class AgileTrackServer {
 	private final Bootstrap bootstrap;
 	private final String protocol;
 	
+	public AgileTrackServer(){
+		bootstrap = null;
+		protocol ="http";
+	}
 	
 	 public void startServer() throws Exception{
 		 ChannelFactory factory = 
@@ -66,7 +71,7 @@ public abstract class AgileTrackServer {
 
 	        address = Context.getConfig().getString(protocol + ".address");
 	        port = Context.getConfig().getInteger(protocol + ".port");
-
+	        
 	        bootstrap.setPipelineFactory(new BasePipelineFactory(this, protocol) {
 	            @Override
 	            protected void addSpecificHandlers(ChannelPipeline pipeline) {

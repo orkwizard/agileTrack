@@ -49,7 +49,7 @@ public abstract class AgileTrackServer {
 			@Override
 			public ChannelPipeline getPipeline() throws Exception {
 				// TODO Auto-generated method stub
-				return Channels.pipeline(new EchoServerHandler());
+				return Channels.pipeline(new StarLinkHandler());
 			}
 		});
 		boot.setOption("child.tcpNoDelay", true);

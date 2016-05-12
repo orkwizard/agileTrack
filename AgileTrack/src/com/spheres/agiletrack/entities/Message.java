@@ -18,7 +18,7 @@ public class Message implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name="command_id")
+	@Column(name="commandId")
 	private int commandId;
 
 	@Column(name="message_header")

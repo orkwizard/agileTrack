@@ -17,4 +17,19 @@ public final class Context {
 	    public static boolean isLoggerEnabled() {
 	        return loggerEnabled;
 	    }
+
+	    private static AgileTrackServer server;
+	    
+	    public static AgileTrackServer getServer(){
+	    	
+	    	return server;
+	    }
+	    
+		public static void init(String[] args) {
+			// TODO Auto-generated method stub
+			
+			
+			
+			
+		}
 }

@@ -54,7 +54,7 @@ public abstract class AgileTrackServer {
 		});
 		boot.setOption("child.tcpNoDelay", true);
 		boot.setOption("child.keepAlive",true);
-		boot.bind(new InetSocketAddress(9999));
+		boot.bind(new InetSocketAddress(8888));
 		System.out.println("Server Started");
 		 
 	 }

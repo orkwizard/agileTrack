@@ -2,11 +2,10 @@ package com.spheres.agiletrack.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
- * The persistent class for the Message database table.
+ * The persistent class for the MESSAGE database table.
  * 
  */
 @Entity
@@ -16,41 +15,52 @@ public class Message implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@Column(name="message_id")
+	private int messageId;
 
-	@Column(name="commandId")
-	private int commandId;
+	private byte checksum;
+
+	private int command;
 
 	@Column(name="message_header")
 	private String messageHeader;
 
+	@Column(name="protocol_footer")
+	private int protocolFooter;
+
 	@Column(name="protocol_header")
 	private String protocolHeader;
+
+	private int reference;
 
 	@Column(name="unit_id")
 	private String unitId;
 
-	//bi-directional many-to-one association to Data
-	@OneToMany(mappedBy="message")
-	private List<Data> data;
-
 	public Message() {
 	}
 
-	public int getId() {
-		return this.id;
+	public int getMessageId() {
+		return this.messageId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setMessageId(int messageId) {
+		this.messageId = messageId;
 	}
 
-	public int getCommandId() {
-		return this.commandId;
+	public byte getChecksum() {
+		return this.checksum;
 	}
 
-	public void setCommandId(int commandId) {
-		this.commandId = commandId;
+	public void setChecksum(byte checksum) {
+		this.checksum = checksum;
+	}
+
+	public int getCommand() {
+		return this.command;
+	}
+
+	public void setCommand(int command) {
+		this.command = command;
 	}
 
 	public String getMessageHeader() {
@@ -61,6 +71,14 @@ public class Message implements Serializable {
 		this.messageHeader = messageHeader;
 	}
 
+	public int getProtocolFooter() {
+		return this.protocolFooter;
+	}
+
+	public void setProtocolFooter(int protocolFooter) {
+		this.protocolFooter = protocolFooter;
+	}
+
 	public String getProtocolHeader() {
 		return this.protocolHeader;
 	}
@@ -69,34 +87,20 @@ public class Message implements Serializable {
 		this.protocolHeader = protocolHeader;
 	}
 
+	public int getReference() {
+		return this.reference;
+	}
+
+	public void setReference(int reference) {
+		this.reference = reference;
+	}
+
 	public String getUnitId() {
 		return this.unitId;
 	}
 
 	public void setUnitId(String unitId) {
 		this.unitId = unitId;
-	}
-
-	public List<Data> getData() {
-		return this.data;
-	}
-
-	public void setData(List<Data> data) {
-		this.data = data;
-	}
-
-	public Data addData(Data data) {
-		getData().add(data);
-		data.setMessage(this);
-
-		return data;
-	}
-
-	public Data removeData(Data data) {
-		getData().remove(data);
-		data.setMessage(null);
-
-		return data;
 	}
 
 }

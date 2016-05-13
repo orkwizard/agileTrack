@@ -20,7 +20,7 @@ public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 	        System.out.flush();
 	    }
 	    Message m =  Decoder.decode(str);
-	    
+	    System.out.println(m.toString());
 	    
 		super.messageReceived(ctx, e);
 	}

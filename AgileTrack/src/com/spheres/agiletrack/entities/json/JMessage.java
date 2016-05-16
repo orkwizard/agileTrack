@@ -7,29 +7,25 @@ import java.util.StringTokenizer;
 
 import org.joda.time.DateTime;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gwt.json.client.JSONObject;
 import com.spheres.agiletrack.entities.Data;
+import com.spheres.agiletrack.entities.Message;
 
-public class Message extends com.spheres.agiletrack.entities.Message {
+public class JMessage extends Message {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	private DateTime date; 
 	private String line;
-	private StringTokenizer tokenizer;
 	private List<Data> data=new ArrayList<Data>();
-	private Gson gson;
 	
-	public Message(String src){
+	public JMessage(String src){
 		clean(src);
-		tokenizer = new StringTokenizer(line, ",");
-		System.out.println("Tokens: " + tokenizer.countTokens());
 		buildMessage();
 	}
 	
@@ -42,7 +38,8 @@ public class Message extends com.spheres.agiletrack.entities.Message {
 		 * No me gusta esta solución buscar una mas elegante
 		 * 
 		 */
-		gson = new GsonBuilder().setPrettyPrinting().create();	
+		StringTokenizer tokenizer;
+		tokenizer = new StringTokenizer(line, ",");
 		int size = tokenizer.countTokens();
 		if(size>3){
 			setDate(constructDate(tokenizer.nextToken(),tokenizer.nextToken()));
@@ -55,19 +52,13 @@ public class Message extends com.spheres.agiletrack.entities.Message {
 			//Check data fields
 			while(!(atoken=tokenizer.nextToken()).contains("*"))
 				buildData(atoken);
-			checksum(atoken);
-			
-			//last one with data and checksum
-			System.out.println(atoken);
-			
-			
-			
+			checksumandData(atoken);
 		}else
 			//Raise Exception: Tokens not valids
 			System.out.println("Error: Tokens not Validos");
 	}
 	
-	private void checksum(String atoken) {
+	private void checksumandData(String atoken) {
 		// TODO Auto-generated method stub
 		//This token has the checksum and one datafield
 		int index = atoken.indexOf("*");
@@ -83,7 +74,7 @@ public class Message extends com.spheres.agiletrack.entities.Message {
 	private void buildData(String token){
 		Data aData = new Data();
 		aData.setField(token);
-		aData.setMessage(this);
+		//aData.setMessage(this);
 		data.add(aData);
 	}
 	
@@ -101,13 +92,16 @@ public class Message extends com.spheres.agiletrack.entities.Message {
 		line = line.replaceAll("\\t",",");
 	}
 	
-	public String toJson(){
-		
-		return gson.toJson(this);
-	}
 	
 	public Message get(){
-		return this;
+		Message m = new Message();
+		m.setMessageHeader(this.getMessageHeader());
+		m.setCommand(this.getCommand());
+		m.setChecksum(this.getChecksum());
+		m.setMessageId(this.getMessageId());
+		m.setReference(this.getReference());
+		m.setUnitId(this.getUnitId());
+		return m;
 	}
 
 	@Override
@@ -126,16 +120,7 @@ public class Message extends com.spheres.agiletrack.entities.Message {
 	}
 	
 	public String getJSON(){
-		ObjectMapper mapper = new ObjectMapper();
-		String json="";
-		
-		try {
-			 json = mapper.writeValueAsString(this.get());
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		String json= gson.toJson(this);
 		return json;
 		
 	}
@@ -145,7 +130,7 @@ public class Message extends com.spheres.agiletrack.entities.Message {
 	}
 
 	public void setDate(DateTime date) {
-		this.date = date;
+		this.date = new DateTime();
 	}
 
 	@Override

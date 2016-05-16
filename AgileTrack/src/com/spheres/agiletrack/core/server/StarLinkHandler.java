@@ -8,6 +8,7 @@ import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.channel.WriteCompletionEvent;
 
 import com.spheres.agiletrack.entities.Message;
+import com.spheres.agiletrack.entities.json.JMessage;
 
 public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 
@@ -19,7 +20,7 @@ public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 	        str+=(char)buf.readByte();
 	        System.out.flush();
 	    }
-	    com.spheres.agiletrack.entities.json.Message m = Decoder.decode(str);
+	    JMessage m = Decoder.decode(str);
 	    System.out.println(m.toString());
 	    System.out.println("JSON:" + m.getJSON());
 	    //System.out.println(m.getJSON());

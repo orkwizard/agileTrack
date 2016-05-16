@@ -19,8 +19,10 @@ public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 	        str+=(char)buf.readByte();
 	        System.out.flush();
 	    }
-	    Message m =  Decoder.decode(str);
+	    com.spheres.agiletrack.entities.json.Message m = Decoder.decode(str);
 	    System.out.println(m.toString());
+	    System.out.println("JSON:" + m.getJSON());
+	    //System.out.println(m.getJSON());
 	    
 		super.messageReceived(ctx, e);
 	}

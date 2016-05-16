@@ -22,6 +22,8 @@ public class Part implements Serializable {
 
 	private short length;
 
+	private boolean optional;
+
 	@Column(name="part_name")
 	private String partName;
 
@@ -55,6 +57,14 @@ public class Part implements Serializable {
 
 	public void setLength(short length) {
 		this.length = length;
+	}
+
+	public boolean getOptional() {
+		return this.optional;
+	}
+
+	public void setOptional(boolean optional) {
+		this.optional = optional;
 	}
 
 	public String getPartName() {

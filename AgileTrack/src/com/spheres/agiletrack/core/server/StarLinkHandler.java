@@ -20,7 +20,7 @@ public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 	        str+=(char)buf.readByte();
 	        System.out.flush();
 	    }
-	    JMessage m = Decoder.decode(str);
+	    JMessage m = Decoder.encode(str);
 	    System.out.println(m.toString());
 	    System.out.println("JSON:" + m.getJSON());
 	    //System.out.println(m.getJSON());

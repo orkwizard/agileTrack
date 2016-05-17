@@ -19,8 +19,8 @@ public class JMessage extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	private DateTime date; 
+	private transient final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	private transient DateTime date; 
 	private String line;
 	private List<Data> data=new ArrayList<Data>();
 	
@@ -39,33 +39,29 @@ public class JMessage extends Message {
 		 * 
 		 */
 		StringTokenizer tokenizer;
-		tokenizer = new StringTokenizer(line, ",");
+		int index_checksum = line.indexOf("*");
+		String instructions = line.substring(0,index_checksum);
+		String checksum = line.substring(index_checksum);
+		tokenizer = new  StringTokenizer(instructions, ",");
 		int size = tokenizer.countTokens();
-		if(size>3){
+		if(size>5){
 			setDate(constructDate(tokenizer.nextToken(),tokenizer.nextToken()));
 			String atoken = tokenizer.nextToken();
-			setProtocolHeader(atoken.substring(0,1));
-			setMessageHeader(atoken.substring(1,4));
+			setProtocolHeader(atoken);
+			setMessageHeader(atoken);
 			setUnitId(atoken);
 			setCommand(Integer.parseInt(tokenizer.nextToken()));
 			setReference(Integer.parseInt(tokenizer.nextToken()));
-			//Check data fields
-			while(!(atoken=tokenizer.nextToken()).contains("*"))
-				buildData(atoken);
-			checksumandData(atoken);
-		}else
-			//Raise Exception: Tokens not valids
-			System.out.println("Error: Tokens not Validos");
+			while(tokenizer.hasMoreTokens())
+				buildData(tokenizer.nextToken());
+			checksum(checksum.replace('*', ' ').trim());
+		}
 	}
 	
-	private void checksumandData(String atoken) {
+	private void checksum(String atoken) {
 		// TODO Auto-generated method stub
 		//This token has the checksum and one datafield
-		int index = atoken.indexOf("*");
-		String data = atoken.substring(0,index);
-		String checksum = atoken.substring((index+1));
-		buildData(data);
-		byte abyte = (byte)Integer.parseInt(checksum, 16);
+		byte abyte = (byte)Integer.parseInt(atoken, 16);
 		setChecksum(abyte);
 		
 		
@@ -138,6 +134,18 @@ public class JMessage extends Message {
 		// TODO Auto-generated method stub
 		String uid = unitId.substring(4);
 		super.setUnitId(uid);
+	}
+
+	@Override
+	public void setMessageHeader(String messageHeader) {
+		// TODO Auto-generated method stub
+		super.setMessageHeader(messageHeader.substring(1,4));
+	}
+
+	@Override
+	public void setProtocolHeader(String protocolHeader) {
+		// TODO Auto-generated method stub
+		super.setProtocolHeader(protocolHeader.substring(0,1));
 	}
 
 }

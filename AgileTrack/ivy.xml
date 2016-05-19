@@ -57,7 +57,7 @@
   			<artifact name="joda-time" type="jar" />
 		</dependency>
 		<!-- http://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
-		<dependency org="org.elasticsearch" name="elasticsearch" rev="1.5.2"/>
+		<dependency org="org.elasticsearch" name="elasticsearch" rev="2.3.2"/>
 		
 		
 	

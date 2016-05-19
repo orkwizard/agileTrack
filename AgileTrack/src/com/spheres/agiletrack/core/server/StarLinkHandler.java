@@ -7,11 +7,14 @@ import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.channel.WriteCompletionEvent;
 
+import com.spheres.agiletrack.elasticsearch.ElasticClient;
 import com.spheres.agiletrack.entities.Message;
 import com.spheres.agiletrack.entities.json.JMessage;
 
 public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 
+	private ElasticClient client = new ElasticClient("10.194.25.220",9300,null);
+	
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
 		ChannelBuffer  buf = (ChannelBuffer) e.getMessage();
@@ -23,7 +26,11 @@ public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 	    JMessage m = Decoder.encode(str);
 	    System.out.println(m.toString());
 	    System.out.println("JSON:" + m.getJSON());
+	    client.addMessage(m);
+	    client.writeMessages();
+	    
 	    //System.out.println(m.getJSON());
+	    
 	    
 		super.messageReceived(ctx, e);
 	}

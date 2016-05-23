@@ -22,11 +22,19 @@ public class JMessage extends Message {
 	private transient final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	private transient DateTime date; 
 	private String line;
+	private transient String instructions;
+	private transient String checksum;
+	private transient int index_checksum;
 	private List<Data> data=new ArrayList<Data>();
+	private transient boolean valid=false;
 	
 	public JMessage(String src){
 		clean(src);
 		buildMessage();
+	}
+	
+	public boolean isValid(){
+		return valid;
 	}
 	
 	private void buildMessage(){
@@ -39,12 +47,11 @@ public class JMessage extends Message {
 		 * 
 		 */
 		StringTokenizer tokenizer;
-		int index_checksum = line.indexOf("*");
-		String instructions = line.substring(0,index_checksum);
-		String checksum = line.substring(index_checksum);
-		tokenizer = new  StringTokenizer(instructions, ",");
-		int size = tokenizer.countTokens();
-		if(size>5){
+		StringTokenizer tokens = new StringTokenizer(line, ",");
+		
+		
+		if(validMessage(tokens)){
+			tokenizer = new  StringTokenizer(instructions, ",");
 			setDate(constructDate(tokenizer.nextToken(),tokenizer.nextToken()));
 			String atoken = tokenizer.nextToken();
 			setProtocolHeader(atoken);
@@ -55,9 +62,27 @@ public class JMessage extends Message {
 			while(tokenizer.hasMoreTokens())
 				buildData(tokenizer.nextToken());
 			checksum(checksum.replace('*', ' ').trim());
+			valid = true;
+		}else{
+			System.out.println("Error: Message not valid !! : "+ line.toString());
+			valid = false;
 		}
+		
 	}
 	
+	private boolean validMessage(StringTokenizer t) {
+		// TODO Auto-generated method stub
+		//check for *
+		//check for minimal tokens
+		index_checksum = line.indexOf("*");
+		if(index_checksum>0 && t.countTokens()>3){
+			instructions = line.substring(0,index_checksum);
+			checksum = line.substring(index_checksum);
+			return true;
+		}
+		return false;
+	}
+
 	private void checksum(String atoken) {
 		// TODO Auto-generated method stub
 		//This token has the checksum and one datafield

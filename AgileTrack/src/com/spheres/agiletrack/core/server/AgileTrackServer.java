@@ -18,7 +18,6 @@ import org.jboss.netty.channel.group.ChannelGroupFuture;
 import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 
-import com.spheres.agiletrack.core.server.test.EchoServerHandler;
 
 
 /* 
@@ -32,6 +31,7 @@ import com.spheres.agiletrack.core.server.test.EchoServerHandler;
 
 public abstract class AgileTrackServer {
 	private final Bootstrap bootstrap;
+	//private final ConnectionlessBootstrap bootstrap;
 	private final String protocol;
 	
 	public AgileTrackServer(){
@@ -43,7 +43,10 @@ public abstract class AgileTrackServer {
 		 ChannelFactory factory = 
 				 new NioServerSocketChannelFactory(Executors.newCachedThreadPool(),Executors.newCachedThreadPool());
 		 
+		
+		 
 		 ServerBootstrap boot = 	new ServerBootstrap(factory);
+		 
 		 boot.setPipelineFactory(new ChannelPipelineFactory() {
 			
 			@Override
@@ -52,6 +55,7 @@ public abstract class AgileTrackServer {
 				return Channels.pipeline(new StarLinkHandler());
 			}
 		});
+		//boot.setOption(key, value);
 		boot.setOption("child.tcpNoDelay", true);
 		boot.setOption("child.keepAlive",true);
 		boot.bind(new InetSocketAddress(8888));
@@ -59,10 +63,10 @@ public abstract class AgileTrackServer {
 		 
 	 }
 	
-	 public AgileTrackServer(Bootstrap bootstrap, String protocol) {
+	 public AgileTrackServer(ConnectionlessBootstrap bootstrap, String protocol) {
 		 this.bootstrap = bootstrap;
 	     this.protocol = protocol;
-	  // Set appropriate channel factory
+	  /* Set appropriate channel factory
 	        if (bootstrap instanceof ServerBootstrap) {
 	            bootstrap.setFactory(GlobalChannelFactory.getFactory());
 	        } else if (bootstrap instanceof ConnectionlessBootstrap) {
@@ -77,7 +81,7 @@ public abstract class AgileTrackServer {
 	            protected void addSpecificHandlers(ChannelPipeline pipeline) {
 	                AgileTrackServer.this.addSpecificHandlers(pipeline);
 	            }
-	        });   
+	        });   */
 	 }
 	 
 	 protected abstract void addSpecificHandlers(ChannelPipeline pipeline);
@@ -137,7 +141,7 @@ public abstract class AgileTrackServer {
 	     * Start server
 	     */
 	    public void start() {
-	        InetSocketAddress endpoint;
+	   /*    InetSocketAddress endpoint;
 	        if (address == null) {
 	            endpoint = new InetSocketAddress(port);
 	        } else {
@@ -153,7 +157,7 @@ public abstract class AgileTrackServer {
 
 	        if (channel != null) {
 	            getChannelGroup().add(channel);
-	        }
+	        }*/
 	    }
 
 	    /**

@@ -3,17 +3,20 @@ package com.spheres.agiletrack.core.server;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelStateEvent;
+import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.channel.WriteCompletionEvent;
+import org.apache.commons.lang3.StringUtils;
+
 
 import com.spheres.agiletrack.elasticsearch.ElasticClient;
-import com.spheres.agiletrack.entities.Message;
 import com.spheres.agiletrack.entities.json.JMessage;
 
 public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 
-	private ElasticClient client = new ElasticClient("10.194.25.220",9300,null);
+	private ElasticClient client = new ElasticClient("10.194.25.220",9300,25);
+	private double server_reference;
 	
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
@@ -21,17 +24,20 @@ public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 		String str="";
 	    while(buf.readable()) {
 	        str+=(char)buf.readByte();
-	        System.out.flush();
 	    }
-	    JMessage m = Decoder.encode(str);
-	    System.out.println(m.toString());
-	    System.out.println("JSON:" + m.getJSON());
-	    client.addMessage(m);
+	    System.out.flush();
+	    String cmd = StringUtils.chomp(str);
+	    if(cmd.equalsIgnoreCase("exit")){
+	    	ctx.getChannel().close();
+	    	client.CLOSING_CLIENT=true;
+	    }else{
+		    JMessage m = Decoder.encode(str);
+		    if(m!=null)
+		    	client.addMessage(m);
+		    
+	    }
+	    buf.clear();
 	    client.writeMessages();
-	    
-	    //System.out.println(m.getJSON());
-	    
-	    
 		super.messageReceived(ctx, e);
 	}
 
@@ -57,6 +63,13 @@ public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 	public void writeComplete(ChannelHandlerContext ctx, WriteCompletionEvent e) throws Exception {
 		// TODO Auto-generated method stub
 		super.writeComplete(ctx, e);
+	}
+
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) throws Exception {
+		// TODO Auto-generated method stub
+		e.getCause().printStackTrace();
+		super.exceptionCaught(ctx, e);
 	}
 
 }

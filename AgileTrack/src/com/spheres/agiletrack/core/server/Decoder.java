@@ -9,7 +9,8 @@ public class Decoder {
 	
 	public static JMessage encode(String line){
 		message = new JMessage(line);
-		return message;
-		
-	}
+		if(message.isValid())
+			return message;
+		return null;
+	}	
 }

@@ -12,7 +12,6 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
 
 public class CommandVIew extends CommandModel implements View {

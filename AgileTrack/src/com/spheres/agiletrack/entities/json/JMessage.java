@@ -7,7 +7,6 @@ import java.util.StringTokenizer;
 
 import org.joda.time.DateTime;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.spheres.agiletrack.entities.Data;

@@ -1,14 +1,15 @@
 package com.spheres.agiletrack.view.forms.authentication;
 
 import com.ejt.vaadin.loginform.LoginForm;
-import com.spheres.agiletrack.event.AgileEventBus;
 import com.spheres.agiletrack.event.AgileEvent.UserLoginRequestedEvent;
+import com.spheres.agiletrack.event.AgileEventBus;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
@@ -17,8 +18,6 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class Login extends LoginForm{

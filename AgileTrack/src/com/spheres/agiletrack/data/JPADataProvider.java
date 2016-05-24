@@ -1,7 +1,6 @@
 package com.spheres.agiletrack.data;
 
 import java.util.Iterator;
-import java.util.List;
 
 import com.spheres.agiletrack.domain.DataProvider;
 import com.spheres.agiletrack.entities.Client;

@@ -6,7 +6,6 @@ import java.util.Iterator;
 import com.google.common.eventbus.Subscribe;
 import com.spheres.agiletrack.app.DashboardImp;
 import com.spheres.agiletrack.entities.Client;
-import com.spheres.agiletrack.event.AgileEvent;
 import com.spheres.agiletrack.event.AgileEvent.UserLoggedOutEvent;
 import com.spheres.agiletrack.event.AgileEventBus;
 import com.spheres.agiletrack.view.forms.ConfigurationTabsViewImp;

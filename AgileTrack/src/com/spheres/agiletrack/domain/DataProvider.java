@@ -1,7 +1,5 @@
 package com.spheres.agiletrack.domain;
 
-import java.util.List;
-
 import com.spheres.agiletrack.entities.Client;
 import com.spheres.agiletrack.entities.Command;
 import com.spheres.agiletrack.entities.Part;

@@ -7,9 +7,7 @@ import java.util.Iterator;
 
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexRequestBuilder;
-import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
@@ -61,8 +59,7 @@ public class ElasticClient {
 	
 	public void writeMessages(){
 		int size = messages.size();
-		System.out.println(size);
-		if(size>=buffer || CLOSING_CLIENT){
+		if(size>=buffer  || CLOSING_CLIENT){
 			Iterator<JMessage> i = messages.iterator();
 			BulkRequestBuilder bulk = es_client.prepareBulk();
 				while(i.hasNext()){

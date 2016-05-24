@@ -1,6 +1,5 @@
 package com.spheres.agiletrack.core.server;
 
-import com.google.gson.Gson;
 import com.spheres.agiletrack.entities.json.JMessage;
 
 

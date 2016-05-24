@@ -1,14 +1,14 @@
 package com.spheres.agiletrack.core.server;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jboss.netty.buffer.ChannelBuffer;
+import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.channel.WriteCompletionEvent;
-import org.apache.commons.lang3.StringUtils;
-
 
 import com.spheres.agiletrack.elasticsearch.ElasticClient;
 import com.spheres.agiletrack.entities.json.JMessage;
@@ -27,6 +27,9 @@ public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 	    }
 	    System.out.flush();
 	    String cmd = StringUtils.chomp(str);
+	    
+	    
+	    
 	    if(cmd.equalsIgnoreCase("exit")){
 	    	ctx.getChannel().close();
 	    	client.CLOSING_CLIENT=true;
@@ -34,11 +37,16 @@ public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 		    JMessage m = Decoder.encode(str);
 		    if(m!=null)
 		    	client.addMessage(m);
-		    
+		    	client.writeMessages();
+		    	Channel ch =  e.getChannel();
+		    	ch.write(e.getMessage());
+		    	System.out.println(ch.getRemoteAddress().toString());
+			
 	    }
 	    buf.clear();
-	    client.writeMessages();
-		super.messageReceived(ctx, e);
+	    
+	    
+	    super.messageReceived(ctx, e);
 	}
 
 	@Override

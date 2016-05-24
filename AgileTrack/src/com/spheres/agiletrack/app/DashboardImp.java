@@ -1,14 +1,13 @@
 package com.spheres.agiletrack.app;
 
+import com.spheres.agiletrack.dummy.DummyDataGenerator;
+import com.spheres.agiletrack.dummy.SparklineChart;
 import com.vaadin.addon.charts.Chart;
-import com.vaadin.addon.charts.Sparkline;
 import com.vaadin.addon.charts.model.ChartType;
 import com.vaadin.addon.charts.model.Configuration;
 import com.vaadin.addon.charts.model.ListSeries;
 import com.vaadin.addon.charts.model.XAxis;
 import com.vaadin.addon.charts.model.YAxis;
-import com.spheres.agiletrack.dummy.DummyDataGenerator;
-import com.spheres.agiletrack.dummy.SparklineChart;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Responsive;
@@ -16,8 +15,6 @@ import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.tapio.googlemaps.client.LatLon;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapInfoWindow;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapMarker;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.CssLayout;
 
 public class DashboardImp extends Dashboard implements View{
 

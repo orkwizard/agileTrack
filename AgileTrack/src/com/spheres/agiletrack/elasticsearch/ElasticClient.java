@@ -8,6 +8,7 @@ import java.util.Iterator;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequestBuilder;
+import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
@@ -59,7 +60,7 @@ public class ElasticClient {
 	
 	public void writeMessages(){
 		int size = messages.size();
-		if(size>=buffer  || CLOSING_CLIENT){
+		if(size>=buffer  || !CLOSING_CLIENT){
 			Iterator<JMessage> i = messages.iterator();
 			BulkRequestBuilder bulk = es_client.prepareBulk();
 				while(i.hasNext()){
@@ -91,6 +92,14 @@ public class ElasticClient {
 	public static void main(String[] args){
 		ElasticClient e = new ElasticClient("10.194.25.220",9300,25);
 		
+	}
+
+	public void writeMessage(JMessage m) {
+		// TODO Auto-generated method stub
+		IndexRequestBuilder response  = es_client.prepareIndex("starlink", "Message").setSource(m.getJSON());
+		response.execute();
+		if(response.get().isCreated())
+			System.out.println("Indexed records in:"+ response.get().getShardInfo().getTotal()  +" miliseconds");
 	}
 	
 }

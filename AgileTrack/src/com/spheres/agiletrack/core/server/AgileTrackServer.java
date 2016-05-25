@@ -8,10 +8,10 @@ import org.jboss.netty.bootstrap.Bootstrap;
 import org.jboss.netty.bootstrap.ConnectionlessBootstrap;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.buffer.HeapChannelBufferFactory;
+import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFactory;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
-import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.group.ChannelGroup;
 import org.jboss.netty.channel.group.ChannelGroupFuture;
 import org.jboss.netty.channel.group.DefaultChannelGroup;
@@ -22,9 +22,6 @@ import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 /* 
  	AgileTrack Server 
  	Usando Netty para manejo de Protocol StarLink
- 
- 
- 
  *
  */
 
@@ -43,14 +40,19 @@ public abstract class AgileTrackServer {
 		 ChannelFactory factory = 
 				 new NioServerSocketChannelFactory(Executors.newCachedThreadPool(),Executors.newCachedThreadPool());
 		 ServerBootstrap boot = 	new ServerBootstrap(factory);
-		 boot.setPipelineFactory(new ChannelPipelineFactory() {
+		 
+		 boot.setPipelineFactory(new BasePipelineFactory());
+		 
+		 
+		 /*boot.setPipelineFactory(new ChannelPipelineFactory() {
 			
+		 boot.setPipelineFactory(new BasePipelineFactory(this,"tcp"){
 			@Override
 			public ChannelPipeline getPipeline() throws Exception {
 				// TODO Auto-generated method stub
 				return Channels.pipeline(new StarLinkHandler());
 			}
-		});
+		});*/
 		//boot.setOption(key, value);
 		boot.setOption("child.tcpNoDelay", true);
 		boot.setOption("child.keepAlive",true);
@@ -59,10 +61,10 @@ public abstract class AgileTrackServer {
 		 
 	 }
 	
-	 public AgileTrackServer(ConnectionlessBootstrap bootstrap, String protocol) {
+	 public AgileTrackServer(Bootstrap bootstrap, String protocol) {
 		 this.bootstrap = bootstrap;
 	     this.protocol = protocol;
-	  /* Set appropriate channel factory
+	     //Set appropriate channel factory
 	        if (bootstrap instanceof ServerBootstrap) {
 	            bootstrap.setFactory(GlobalChannelFactory.getFactory());
 	        } else if (bootstrap instanceof ConnectionlessBootstrap) {
@@ -72,12 +74,12 @@ public abstract class AgileTrackServer {
 	        address = Context.getConfig().getString(protocol + ".address");
 	        port = Context.getConfig().getInteger(protocol + ".port");
 	        
-	        bootstrap.setPipelineFactory(new BasePipelineFactory(this, protocol) {
+	        /*bootstrap.setPipelineFactory(new BasePipelineFactory() {
 	            @Override
 	            protected void addSpecificHandlers(ChannelPipeline pipeline) {
 	                AgileTrackServer.this.addSpecificHandlers(pipeline);
 	            }
-	        });   */
+	        });*/   
 	 }
 	 
 	 protected abstract void addSpecificHandlers(ChannelPipeline pipeline);
@@ -137,7 +139,7 @@ public abstract class AgileTrackServer {
 	     * Start server
 	     */
 	    public void start() {
-	   /*    InetSocketAddress endpoint;
+	       InetSocketAddress endpoint;
 	        if (address == null) {
 	            endpoint = new InetSocketAddress(port);
 	        } else {
@@ -153,7 +155,7 @@ public abstract class AgileTrackServer {
 
 	        if (channel != null) {
 	            getChannelGroup().add(channel);
-	        }*/
+	        }
 	    }
 
 	    /**

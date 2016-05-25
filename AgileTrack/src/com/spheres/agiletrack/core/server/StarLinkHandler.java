@@ -1,35 +1,36 @@
 package com.spheres.agiletrack.core.server;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
-import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
+import org.jboss.netty.channel.SimpleChannelHandler;
 import org.jboss.netty.channel.WriteCompletionEvent;
 
 import com.spheres.agiletrack.elasticsearch.ElasticClient;
 import com.spheres.agiletrack.entities.json.JMessage;
 
-public class StarLinkHandler extends SimpleChannelUpstreamHandler {
+public class StarLinkHandler extends SimpleChannelHandler {
 
 	private ElasticClient client = new ElasticClient("10.194.25.220",9300,25);
 	private double server_reference;
 	
 	@Override
-	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
-		ChannelBuffer  buf = (ChannelBuffer) e.getMessage();
-		String str="";
-	    while(buf.readable()) {
-	        str+=(char)buf.readByte();
-	    }
-	    System.out.flush();
+	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e)throws  Exception{
+		String str = e.getMessage().toString();
 	    String cmd = StringUtils.chomp(str);
+	    if(cmd.equalsIgnoreCase("exit"))
+	    	ctx.getChannel().disconnect();
 	    
+	    JMessage m = Decoder.encode(str);
+	    if(m!=null)
+	    	client.writeMessage(m);
 	    
-	    
+	    Channel ch =  e.getChannel();
+	    ch.write(m.getJSON());
+	    /*
 	    if(cmd.equalsIgnoreCase("exit")){
 	    	ctx.getChannel().close();
 	    	client.CLOSING_CLIENT=true;
@@ -39,14 +40,11 @@ public class StarLinkHandler extends SimpleChannelUpstreamHandler {
 		    	client.addMessage(m);
 		    	client.writeMessages();
 		    	Channel ch =  e.getChannel();
-		    	ch.write(e.getMessage());
-		    	System.out.println(ch.getRemoteAddress().toString());
-			
-	    }
-	    buf.clear();
+		    	ch.write(m.getJSON());
+		 }*/
+	    System.out.flush();
 	    
-	    
-	    super.messageReceived(ctx, e);
+	    super.messageReceived(ctx,e);
 	}
 
 	@Override

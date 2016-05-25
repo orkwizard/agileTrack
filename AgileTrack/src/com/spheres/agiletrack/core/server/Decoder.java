@@ -11,5 +11,8 @@ public class Decoder {
 		if(message.isValid())
 			return message;
 		return null;
-	}	
+	}
+	
+	
+	
 }

@@ -28,23 +28,14 @@ public class StarLinkHandler extends SimpleChannelHandler {
 	    if(m!=null)
 	    	client.writeMessage(m);
 	    
-	    Channel ch =  e.getChannel();
-	    ch.write(m.getJSON());
-	    /*
-	    if(cmd.equalsIgnoreCase("exit")){
-	    	ctx.getChannel().close();
-	    	client.CLOSING_CLIENT=true;
-	    }else{
-		    JMessage m = Decoder.encode(str);
-		    if(m!=null)
-		    	client.addMessage(m);
-		    	client.writeMessages();
-		    	Channel ch =  e.getChannel();
-		    	ch.write(m.getJSON());
-		 }*/
-	    System.out.flush();
-	    
+	    StarLinkCompiler.compile(m,ctx);
 	    super.messageReceived(ctx,e);
+	}
+
+	@Override
+	public void writeRequested(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
+		// TODO Auto-generated method stub
+		super.writeRequested(ctx, e);
 	}
 
 	@Override

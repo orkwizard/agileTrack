@@ -27,22 +27,13 @@ public class Confirmation {
 		return codes;
 	}
 
-
-
-	
-
-
 	public int getResult_code() {
 		return result_code;
 	}
 
-
-
 	public void setResult_code(int result_code) {
 		this.result_code = result_code;
 	}
-
-
 
 	public Confirmation(){
 		codes = new HashMap<String,String>();
@@ -72,8 +63,4 @@ public class Confirmation {
 		codes.put("98","Unit unlock is needed	");
 		codes.put("99","Other error	");
 	}
-	
-	
-	
-	
 }

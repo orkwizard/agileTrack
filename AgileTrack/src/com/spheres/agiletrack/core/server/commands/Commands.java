@@ -2,7 +2,12 @@ package com.spheres.agiletrack.core.server.commands;
 
 import java.util.HashMap;
 
-public class Commands {
+public class Commands extends Command{
+	public Commands(String c, String d, double v) {
+		super(c, d, v);
+		// TODO Auto-generated constructor stub
+	}
+
 	private static final HashMap<String,Command> commands;
 	static{
 		commands = new HashMap<String,Command>();

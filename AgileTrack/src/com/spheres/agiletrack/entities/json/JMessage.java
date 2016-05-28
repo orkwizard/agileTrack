@@ -51,7 +51,10 @@ public class JMessage extends Message {
 		
 		if(validMessage(tokens)){
 			tokenizer = new  StringTokenizer(instructions, ",");
-			setDate(constructDate(tokenizer.nextToken(),tokenizer.nextToken()));
+			
+			/*TEST MESSAGES WITHOUT DATE
+			setDate(constructDate(tokenizer.nextToken(),tokenizer.nextToken()));*/
+			
 			String atoken = tokenizer.nextToken();
 			setProtocolHeader(atoken);
 			setMessageHeader(atoken);

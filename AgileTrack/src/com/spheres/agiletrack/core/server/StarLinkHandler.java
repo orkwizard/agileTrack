@@ -29,6 +29,8 @@ public class StarLinkHandler extends SimpleChannelHandler {
 	    	client.writeMessage(m);
 	    
 	    StarLinkCompiler.compile(m,ctx);
+	    
+	    
 	    super.messageReceived(ctx,e);
 	}
 

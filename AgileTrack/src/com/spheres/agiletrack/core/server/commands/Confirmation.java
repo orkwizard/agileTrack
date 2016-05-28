@@ -3,39 +3,17 @@ package com.spheres.agiletrack.core.server.commands;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Confirmation {
+public class Confirmation extends Command{
+
+	public Confirmation(String c, String d, double v) {
+		super(c, d, v);
+		// TODO Auto-generated constructor stub
+	}
 
 	private int original_reference;
 	private int result_code;
-	private Map<String,String> codes;
-	
-	
-	
-	public int getOriginal_reference() {
-		return original_reference;
-	}
-
-
-
-	public void setOriginal_reference(int original_reference) {
-		this.original_reference = original_reference;
-	}
-
-
-
-	public Map<String, String> getCodes() {
-		return codes;
-	}
-
-	public int getResult_code() {
-		return result_code;
-	}
-
-	public void setResult_code(int result_code) {
-		this.result_code = result_code;
-	}
-
-	public Confirmation(){
+	private static final Map<String,String> codes;
+	static{
 		codes = new HashMap<String,String>();
 		codes.put("01","Command is acknowledged	");
 		codes.put("02","Unsupported command	");
@@ -63,4 +41,32 @@ public class Confirmation {
 		codes.put("98","Unit unlock is needed	");
 		codes.put("99","Other error	");
 	}
+	
+	
+	
+	public int getOriginal_reference() {
+		return original_reference;
+	}
+
+
+
+	public void setOriginal_reference(int original_reference) {
+		this.original_reference = original_reference;
+	}
+
+
+
+	public Map<String, String> getCodes() {
+		return codes;
+	}
+
+	public int getResult_code() {
+		return result_code;
+	}
+
+	public void setResult_code(int result_code) {
+		this.result_code = result_code;
+	}
+
+
 }

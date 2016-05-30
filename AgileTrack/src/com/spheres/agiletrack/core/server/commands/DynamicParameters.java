@@ -2,6 +2,8 @@ package com.spheres.agiletrack.core.server.commands;
 
 import java.util.HashMap;
 
+import com.mysql.fabric.xmlrpc.base.Param;
+
 public class DynamicParameters {
 
 	/*
@@ -16,6 +18,20 @@ public class DynamicParameters {
 	#USER#	User defined dynamic field	hello world	2.18
 	 */
 	
-	public static final HashMap<String,S>
+	private HashMap<String,Parameter> unit_parameters;
+	
+	/*
+	 * Event information
+	 * The following fields exist only for Event report events:
+
+		Parameter	Description	Example
+		#EID#	Event number	01
+		#EDSC#	Event description	Location
+
+	 */
+	private HashMap<String,Parameter> event_parameter;
+	
+	
+	
 	
 }

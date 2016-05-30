@@ -6,6 +6,11 @@ public class WakeUp {
 	//A string in the format of "N.NN" containing the unit's protocol version
 	private String protocol_version;
 	
+	/*
+		The following message will be sent on the first power-up sequence of a unit version 1.00 and protocol version of 1.00:
+		$SLU0004D2,01,1,1.00,1.00*EE
+	*/
+	
 	public String getUnit_version() {
 		return unit_version;
 	}

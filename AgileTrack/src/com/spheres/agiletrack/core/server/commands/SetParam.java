@@ -5,6 +5,10 @@ public class SetParam extends Command {
 	private String param_number;
 	private String new_value;
 	
+	//In response, the unit will send a Confirmation message with a result code of 01 (acknowledgment) or 04 (one of the parameters is invalid).
+	
+	private int confirmation_message; 
+	
 	/*
 	 * This command is sent to the StarLink unit in order to change the value of a numbered parameter.
 	
@@ -31,9 +35,22 @@ public class SetParam extends Command {
 	*/
 		
 	
+	public int getConfirmation_message() {
+		return confirmation_message;
+	}
+
+
+
+	public void setConfirmation_message(int confirmation_message) {
+		this.confirmation_message = confirmation_message;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "SetParam [param_number=" + param_number + ", new_value=" + new_value + "]";
+		return "SetParam [param_number=" + param_number + ", new_value=" + new_value + ", confirmation_message="
+				+ confirmation_message + "]";
 	}
 
 

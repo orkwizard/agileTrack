@@ -7,7 +7,12 @@ public class RequestParam extends Command {
 	//Response (unit → server):
 	private String parameter_value;
 	
-	
+	/*
+		Response (unit → server):
+		Part name	Length (characters)	Description
+		Parameter number	1-4	Decimal parameter number (1-9999)
+		Parameter value	As needed	The value of the requested parameter
+	*/
 	
 	
 	@Override
